@@ -3,9 +3,9 @@ import path from "path";
 import got, { Response } from "got";
 import { CLIEngine } from "@typescript-eslint/utils/dist/ts-eslint";
 
-const BITBUCKET_WORKSPACE = "curalie"; //getEnv("BITBUCKET_WORKSPACE");
-const BITBUCKET_REPO_SLUG = "tnp-chameleon"; // getEnv("BITBUCKET_REPO_SLUG");
-const BITBUCKET_COMMIT = "919db18"; // getEnv("BITBUCKET_COMMIT");
+const BITBUCKET_WORKSPACE = getEnv("BITBUCKET_WORKSPACE"); //"curalie";
+const BITBUCKET_REPO_SLUG = getEnv("BITBUCKET_REPO_SLUG"); //"tnp-chameleon";
+const BITBUCKET_COMMIT = getEnv("BITBUCKET_COMMIT"); //"919db18";
 const BITBUCKET_API_AUTH = getEnv("BITBUCKET_API_AUTH");
 
 const MAX_ANNOTATIONS_PER_REQUEST = 100;

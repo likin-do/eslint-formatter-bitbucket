@@ -1,5 +1,5 @@
 import path from "path";
-// import stylish from "eslint/lib/cli-engine/formatters/stylish";
+import stylish from "eslint-formatter-stylish";
 import got, { Response } from "got";
 import { CLIEngine } from "@typescript-eslint/utils/dist/ts-eslint";
 
@@ -205,5 +205,6 @@ function getEnv(key: string) {
 
 module.exports = async function (results: CLIEngine.LintResult[]) {
   await processResults(results);
-  // return stylish(results);
+  // @ts-expect-error wrong 3rd party type
+  return stylish(results);
 };

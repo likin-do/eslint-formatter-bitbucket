@@ -36,7 +36,7 @@ function generateReport(results) {
     const details = `${problemCount} problem${problemCount !== 1 ? "s" : ""} (${errorCount} error${errorCount !== 1 ? "s" : ""}, ${warningCount} warning${warningCount !== 1 ? "s" : ""})`;
     const result = errorCount > 0 ? "FAILED" : "PASSED";
     return {
-        title: "ESLint report",
+        title: "ESLint Bitbucket reporter",
         reporter: "ESLint",
         report_type: "TEST",
         details,

@@ -63,7 +63,7 @@ function generateReport(results: CLIEngine.LintResult[]): BBReportData {
   const result = errorCount > 0 ? "FAILED" : "PASSED";
 
   return {
-    title: "ESLint report",
+    title: "ESLint Bitbucket reporter",
     reporter: "ESLint",
     report_type: "TEST",
     details,

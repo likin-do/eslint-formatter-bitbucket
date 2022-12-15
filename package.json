@@ -14,7 +14,6 @@
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "eslint": "^8.17.0",
-    "eslint-formatter-stylish": "^8.3.0",
     "prettier": "^2.7.0",
     "typescript": "^4.9.4"
   },
@@ -22,6 +21,7 @@
     "eslint": ">= 7 < 8"
   },
   "dependencies": {
-    "got": "^11.6.1"
+    "got": "^11.6.1",
+    "eslint-formatter-stylish": "^8.3.0"
   }
 }

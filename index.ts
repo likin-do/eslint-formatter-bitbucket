@@ -148,7 +148,7 @@ async function processResults(results: CLIEngine.LintResult[]) {
     await deleteReport(reportId);
     console.log("Previous report deleted");
   } catch (error: any) {
-    console.log("❌ Report deletion failed");
+    console.log("❌ Report deletion failed!");
 
     // if (error.request) {
     //   console.log(error.request.options);
@@ -158,6 +158,7 @@ async function processResults(results: CLIEngine.LintResult[]) {
     } else {
       console.error(error);
     }
+    throw error;
   }
 
   try {
@@ -174,6 +175,7 @@ async function processResults(results: CLIEngine.LintResult[]) {
     } else {
       console.error(error);
     }
+    throw error;
   }
 
   try {
@@ -194,6 +196,7 @@ async function processResults(results: CLIEngine.LintResult[]) {
     } else {
       console.error(error);
     }
+    throw error;
   }
 }
 

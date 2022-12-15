@@ -150,9 +150,9 @@ async function processResults(results: CLIEngine.LintResult[]) {
   } catch (error: any) {
     console.log("❌ Report deletion failed");
 
-    if (error.request) {
-      console.log(error.request.options);
-    }
+    // if (error.request) {
+    //   console.log(error.request.options);
+    // }
     if (error.response) {
       console.error(error.message, error.response.body);
     } else {
@@ -166,9 +166,9 @@ async function processResults(results: CLIEngine.LintResult[]) {
   } catch (error: any) {
     console.log("❌ Report creation failed");
 
-    if (error.request) {
-      console.log(error.request.options);
-    }
+    // if (error.request) {
+    //   console.log(error.request.options);
+    // }
     if (error.response) {
       console.error(error.message, error.response.body);
     } else {
@@ -177,14 +177,18 @@ async function processResults(results: CLIEngine.LintResult[]) {
   }
 
   try {
-    await createAnnotations(reportId, annotations);
-    console.log("Annotations added");
-  } catch (error: any) {
-    console.log("❌ Annotations adding failed");
+    if (annotations.length > 0) {
+      console.log("✍🏼 Adding Annotations ...");
 
-    if (error.request) {
-      console.log(error.request.options);
+      await createAnnotations(reportId, annotations);
+      console.log("✅ Annotations added");
     }
+  } catch (error: any) {
+    console.log("❌ Annotations adding failed!");
+
+    // if (error.request) {
+    //   console.log(error.request.options);
+    // }
     if (error.response) {
       console.error(error.message, error.response.body);
     } else {

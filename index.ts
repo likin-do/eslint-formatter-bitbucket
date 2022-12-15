@@ -186,6 +186,8 @@ async function processResults(results: CLIEngine.LintResult[]) {
       console.log(annotations);
       await createAnnotations(reportId, annotations);
       console.log("✅ Annotations added!");
+    } else {
+      console.log("⚠️ no annotations found!", annotations);
     }
   } catch (error: any) {
     console.log("❌ Annotations adding failed!");
@@ -213,6 +215,8 @@ function getEnv(key: string) {
 }
 
 module.exports = async function (results: CLIEngine.LintResult[]) {
+  console.log(results);
+
   await processResults(results);
   // @ts-expect-error wrong 3rd party type
   return stylish(results);

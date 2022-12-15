@@ -132,6 +132,9 @@ async function processResults(results) {
             await createAnnotations(reportId, annotations);
             console.log("✅ Annotations added!");
         }
+        else {
+            console.log("⚠️ no annotations found!", annotations);
+        }
     }
     catch (error) {
         console.log("❌ Annotations adding failed!");
@@ -155,6 +158,7 @@ function getEnv(key) {
     return test;
 }
 module.exports = async function (results) {
+    console.log(results);
     await processResults(results);
     // @ts-expect-error wrong 3rd party type
     return (0, eslint_formatter_stylish_1.default)(results);

@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
-// import stylish from "eslint/lib/cli-engine/formatters/stylish";
+const eslint_formatter_stylish_1 = __importDefault(require("eslint-formatter-stylish"));
 const got_1 = __importDefault(require("got"));
 const BITBUCKET_WORKSPACE = getEnv("BITBUCKET_WORKSPACE"); //"curalie";
 const BITBUCKET_REPO_SLUG = getEnv("BITBUCKET_REPO_SLUG"); //"tnp-chameleon";
@@ -90,52 +90,61 @@ async function processResults(results) {
     const report = generateReport(results);
     const annotations = generateAnnotations(results, reportId);
     try {
+        console.log("✍🏼 Deleting previous report...");
         await deleteReport(reportId);
-        console.log("Previous report deleted");
+        console.log("✅ Previous report deleted!");
     }
     catch (error) {
-        console.log("❌ Report deletion failed");
-        if (error.request) {
-            console.log(error.request.options);
-        }
+        console.log("❌ Report deletion failed!");
+        // if (error.request) {
+        //   console.log(error.request.options);
+        // }
         if (error.response) {
             console.error(error.message, error.response.body);
         }
         else {
             console.error(error);
         }
+        throw error;
     }
     try {
+        console.log("✍🏼 Creating a new report...");
         await createReport(reportId, report);
-        console.log("New report created");
+        console.log("✅ New report created");
     }
     catch (error) {
         console.log("❌ Report creation failed");
-        if (error.request) {
-            console.log(error.request.options);
-        }
+        // if (error.request) {
+        //   console.log(error.request.options);
+        // }
         if (error.response) {
             console.error(error.message, error.response.body);
         }
         else {
             console.error(error);
         }
+        throw error;
     }
     try {
-        await createAnnotations(reportId, annotations);
-        console.log("Annotations added");
+        if (annotations.length > 0) {
+            console.log("✍🏼 Adding new annotations...");
+            console.log(annotations);
+            await createAnnotations(reportId, annotations);
+            console.log("✅ Annotations added!");
+        }
     }
     catch (error) {
-        console.log("❌ Annotations adding failed");
-        if (error.request) {
-            console.log(error.request.options);
-        }
+        console.log("❌ Annotations adding failed!");
+        // if (error.request) {
+        //   console.log(error.request.options);
+        // }
         if (error.response) {
             console.error(error.message, error.response.body);
         }
         else {
             console.error(error);
         }
+        throw error;
     }
 }
 function getEnv(key) {
@@ -147,6 +156,7 @@ function getEnv(key) {
 }
 module.exports = async function (results) {
     await processResults(results);
-    // return stylish(results);
+    // @ts-expect-error wrong 3rd party type
+    return (0, eslint_formatter_stylish_1.default)(results);
 };
 //# sourceMappingURL=index.js.map

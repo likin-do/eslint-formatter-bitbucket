@@ -145,8 +145,9 @@ async function processResults(results: CLIEngine.LintResult[]) {
   const annotations = generateAnnotations(results, reportId);
 
   try {
+    console.log("✍🏼 Deleting previous report...");
     await deleteReport(reportId);
-    console.log("Previous report deleted");
+    console.log("✅ Previous report deleted!");
   } catch (error: any) {
     console.log("❌ Report deletion failed!");
 
@@ -162,8 +163,9 @@ async function processResults(results: CLIEngine.LintResult[]) {
   }
 
   try {
+    console.log("✍🏼 Creating a new report...");
     await createReport(reportId, report);
-    console.log("New report created");
+    console.log("✅ New report created");
   } catch (error: any) {
     console.log("❌ Report creation failed");
 
@@ -180,10 +182,10 @@ async function processResults(results: CLIEngine.LintResult[]) {
 
   try {
     if (annotations.length > 0) {
-      console.log("✍🏼 Adding Annotations ...");
-
+      console.log("✍🏼 Adding new annotations...");
+      console.log(annotations);
       await createAnnotations(reportId, annotations);
-      console.log("✅ Annotations added");
+      console.log("✅ Annotations added!");
     }
   } catch (error: any) {
     console.log("❌ Annotations adding failed!");

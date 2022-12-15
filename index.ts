@@ -151,9 +151,6 @@ async function processResults(results: CLIEngine.LintResult[]) {
   } catch (error: any) {
     console.log("❌ Report deletion failed!");
 
-    // if (error.request) {
-    //   console.log(error.request.options);
-    // }
     if (error.response) {
       console.error(error.message, error.response.body);
     } else {
@@ -169,9 +166,6 @@ async function processResults(results: CLIEngine.LintResult[]) {
   } catch (error: any) {
     console.log("❌ Report creation failed");
 
-    // if (error.request) {
-    //   console.log(error.request.options);
-    // }
     if (error.response) {
       console.error(error.message, error.response.body);
     } else {
@@ -183,7 +177,6 @@ async function processResults(results: CLIEngine.LintResult[]) {
   try {
     if (annotations.length > 0) {
       console.log("✍🏼 Adding new annotations...");
-      console.log(annotations);
       await createAnnotations(reportId, annotations);
       console.log("✅ Annotations added!");
     } else {
@@ -215,8 +208,6 @@ function getEnv(key: string) {
 }
 
 module.exports = function (results: CLIEngine.LintResult[]) {
-  console.log(results);
-
   processResults(results);
   // @ts-expect-error wrong 3rd party type
   return stylish(results);

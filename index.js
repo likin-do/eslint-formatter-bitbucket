@@ -96,9 +96,6 @@ async function processResults(results) {
     }
     catch (error) {
         console.log("❌ Report deletion failed!");
-        // if (error.request) {
-        //   console.log(error.request.options);
-        // }
         if (error.response) {
             console.error(error.message, error.response.body);
         }
@@ -114,9 +111,6 @@ async function processResults(results) {
     }
     catch (error) {
         console.log("❌ Report creation failed");
-        // if (error.request) {
-        //   console.log(error.request.options);
-        // }
         if (error.response) {
             console.error(error.message, error.response.body);
         }
@@ -128,7 +122,6 @@ async function processResults(results) {
     try {
         if (annotations.length > 0) {
             console.log("✍🏼 Adding new annotations...");
-            console.log(annotations);
             await createAnnotations(reportId, annotations);
             console.log("✅ Annotations added!");
         }
@@ -158,7 +151,6 @@ function getEnv(key) {
     return test;
 }
 module.exports = function (results) {
-    console.log(results);
     processResults(results);
     // @ts-expect-error wrong 3rd party type
     return (0, eslint_formatter_stylish_1.default)(results);

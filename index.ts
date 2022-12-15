@@ -214,10 +214,10 @@ function getEnv(key: string) {
   return test;
 }
 
-module.exports = async function (results: CLIEngine.LintResult[]) {
+module.exports = function (results: CLIEngine.LintResult[]) {
   console.log(results);
 
-  await processResults(results);
+  processResults(results);
   // @ts-expect-error wrong 3rd party type
   return stylish(results);
 };

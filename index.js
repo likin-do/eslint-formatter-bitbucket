@@ -157,9 +157,9 @@ function getEnv(key) {
     }
     return test;
 }
-module.exports = async function (results) {
+module.exports = function (results) {
     console.log(results);
-    await processResults(results);
+    processResults(results);
     // @ts-expect-error wrong 3rd party type
     return (0, eslint_formatter_stylish_1.default)(results);
 };

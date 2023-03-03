@@ -6,7 +6,11 @@
   "files": [
     "dist"
   ],
-  "author": "Spartez Software",
+  "contributors": [
+    "Spartez Software",
+    "a7madgamal (https://github.com/a7madgamal)",
+    "Joakim Hedlund <contact@joakimhedlund.com> (https://github.com/Sleavely)"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "tsc",

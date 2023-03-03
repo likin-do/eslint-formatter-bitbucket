@@ -6,19 +6,36 @@ import { type CLIEngine } from '@typescript-eslint/utils/dist/ts-eslint'
 const BITBUCKET_WORKSPACE = getEnv('BITBUCKET_WORKSPACE')
 const BITBUCKET_REPO_SLUG = getEnv('BITBUCKET_REPO_SLUG')
 const BITBUCKET_COMMIT = getEnv('BITBUCKET_COMMIT')
-const BITBUCKET_API_AUTH = getEnv('BITBUCKET_API_AUTH')
 
 const MAX_ANNOTATIONS_PER_REQUEST = 100
 
-const httpClient = got.extend({
-  prefixUrl: 'https://api.bitbucket.org/2.0',
-  responseType: 'json' as const,
-  headers: {
-    Authorization: `Bearer ${BITBUCKET_API_AUTH}`,
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-})
+let gotOptions
+try {
+  const BITBUCKET_API_AUTH = getEnv('BITBUCKET_API_AUTH')
+  gotOptions = {
+    prefixUrl: 'https://api.bitbucket.org',
+    headers: {
+      Authorization: BITBUCKET_API_AUTH,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  }
+} catch (err) {
+  if (err instanceof Error && err.toString().includes('BITBUCKET_API_AUTH')) {
+    gotOptions = {
+      prefixUrl: 'http://localhost:29418',
+      headers: {
+        Host: 'api.bitbucket.org',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    }
+  } else {
+    throw err
+  }
+}
+
+const httpClient = got.extend(gotOptions)
 
 enum SEVERITIES {
   MEDIUM = 'MEDIUM',
@@ -102,13 +119,13 @@ function generateAnnotations (
 
 async function deleteReport (reportId: string): Promise<Response> {
   return await httpClient.delete(
-    `repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/commit/${BITBUCKET_COMMIT}/reports/${reportId}`,
+    `2.0/repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/commit/${BITBUCKET_COMMIT}/reports/${reportId}`,
   )
 }
 
 async function createReport (reportId: string, reportData: BBReportData): Promise<Response> {
   return await httpClient.put(
-    `repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/commit/${BITBUCKET_COMMIT}/reports/${reportId}`,
+    `2.0/repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/commit/${BITBUCKET_COMMIT}/reports/${reportId}`,
     {
       json: reportData,
       responseType: 'json',
@@ -122,7 +139,7 @@ async function createAnnotations (
 ): Promise<Response<unknown>> {
   const chunk = annotations.slice(0, MAX_ANNOTATIONS_PER_REQUEST)
   const response = await httpClient.post(
-    `repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/commit/${BITBUCKET_COMMIT}/reports/${reportId}/annotations`,
+    `2.0/repositories/${BITBUCKET_WORKSPACE}/${BITBUCKET_REPO_SLUG}/commit/${BITBUCKET_COMMIT}/reports/${reportId}/annotations`,
     {
       json: chunk,
       responseType: 'json',

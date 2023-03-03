@@ -28,6 +28,15 @@ pipelines:
             - npx eslint -f bitbucket .
 ```
 
+### Outside of Bitbucket Pipelines
+
+If you are running the formatter in a context outside of Bitbucket Pipelines, for example from a local environment or in a custom CI provider, you'll need to set some environment variables manually:
+
+* `BITBUCKET_API_AUTH` - the value for the "Authorization" header when communicating with the [Bitbucket API](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication), e.g. `Bearer my_access_token`
+* `BITBUCKET_COMMIT` - commit SHA for the current run, e.g. `a624d1419b98`
+* `BITBUCKET_WORKSPACE` - e.g. `Sleavely`
+* `BITBUCKET_REPO_SLUG` - URL-friendly repo name, e.g. `eslint-formatter-bitbucket`
+
 ## License
 
 See [LICENSE](./LICENSE)

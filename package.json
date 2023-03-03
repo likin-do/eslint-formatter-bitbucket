@@ -17,21 +17,21 @@
     "test": "tsc && eslint scripts/code_insights_report.ts -f ./dist/index.js"
   },
   "devDependencies": {
-    "@types/eslint": "^8.4.10",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
-    "eslint": "^8.17.0",
+    "@types/eslint": "^8.21.1",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
     "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "eslint": ">= 7"
   },
   "dependencies": {
-    "got": "^11.6.1",
-    "eslint-formatter-stylish": "^8.3.0"
+    "eslint-formatter-stylish": "^8.3.0",
+    "got": "^11.8.6"
   }
 }

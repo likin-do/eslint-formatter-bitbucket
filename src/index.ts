@@ -15,7 +15,7 @@ try {
   gotOptions = {
     prefixUrl: 'https://api.bitbucket.org',
     headers: {
-      Authorization: BITBUCKET_API_AUTH,
+      Authorization: `Bearer ${BITBUCKET_API_AUTH}`,
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
@@ -159,7 +159,7 @@ async function processResults (results: CLIEngine.LintResult[]): Promise<void> {
   const reportId = `eslint-${BITBUCKET_COMMIT}`
   const report = generateReport(results)
   const annotations = generateAnnotations(results, reportId)
-
+  
   try {
     console.log('✍🏼 Deleting previous report...')
     await deleteReport(reportId)

@@ -2,9 +2,10 @@
   "name": "eslint-formatter-bitbucket",
   "version": "1.0.0",
   "description": "ESLint formatter that uploads results as Bitbucket report",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "contributors": [
     "Spartez Software",
@@ -13,6 +14,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc",
     "test": "tsc && eslint scripts/code_insights_report.ts -f ./dist/index.js"
   },

@@ -15,7 +15,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "prepare": "npm run build",
     "build": "tsc",
     "test": "tsc && eslint scripts/code_insights_report.ts -f ./dist/index.js"
   },
